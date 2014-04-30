@@ -5,26 +5,30 @@ module OrderBot
       @authenticated = false
     end
 
-    def submit_order()
+    def submit_order(order)
       authenticate
       @client.call(:pl_submit_order, message: {
-        #TODO
+        system_id: config.username,
+        password: config.password,
+        orders: [
+          { pl_order: order.to_h }
+        ]
       }).body
     end
 
-    def get_order_status()
-      authenticate
-      @client.call(:pl_get_order_status, message: {
-        #TODO
-      }).body
-    end
+    # def get_order_status()
+    #   authenticate
+    #   @client.call(:pl_get_order_status, message: {
+    #     #TODO
+    #   }).body
+    # end
 
-    def get_inventory()
-      authenticate
-      @client.call(:pl_get_inventory, message: {
-        #TODO
-      }).body
-    end
+    # def get_inventory()
+    #   authenticate
+    #   @client.call(:pl_get_inventory, message: {
+    #     #TODO
+    #   }).body
+    # end
 
     def test_login(username, password)
       result = @client.call(:test_login, message: {
@@ -32,11 +36,10 @@ module OrderBot
         password: password
       }).body
 
-      if result[:test_login_response][:test_login_result] == "Login Fail!"
-        #TODO
-      else
-        #TODO
+      if result[:test_login_response][:test_login_result] == "Login Success!"
         @authenticated = true
+      else
+        raise SecurityError.new("Cannot authenticate")
       end
     end
 
