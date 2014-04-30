@@ -36,7 +36,10 @@ module OrderBot
 
     def to_h
       hash = super
-      hash[:order_lines] = (order_lines || []).map(&:to_h)
+      hash[:shipping_address] = shipping_address.to_h
+      hash[:billing_address] = billing_address.to_h
+      hash[:payment] = payment.to_h
+      hash[:order_lines] = (order_lines || []).collect {|line| {pl_order_line: line.to_h} }
       hash
     end
   end
