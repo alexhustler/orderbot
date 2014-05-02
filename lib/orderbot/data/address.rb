@@ -1,5 +1,5 @@
 module OrderBot
-  class Address < Base
+  class Address < AbstractData
     attr_accessor :first_name,
       :last_name,
       :company_name,

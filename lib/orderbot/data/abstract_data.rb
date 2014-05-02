@@ -1,5 +1,5 @@
 module OrderBot
-  class Base
+  class AbstractData
     def initialize(options)
       options.each do |prop, value|
         self.public_send "#{prop}=", value

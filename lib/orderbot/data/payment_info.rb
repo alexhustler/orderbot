@@ -1,5 +1,5 @@
 module OrderBot
-  class PaymentInfo < Base
+  class PaymentInfo < AbstractData
     attr_accessor :payment_type,
       :transaction_id,
       :payment_date,

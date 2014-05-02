@@ -7,32 +7,34 @@ module OrderBot
 
     def submit_order(order)
       authenticate
-      @client.call(:pl_submit_order, message: {
+      data = @client.call(:pl_submit_order, message: {
         "args" => {
           "SystemId" => config.username,
           "Password" => config.password,
           "Orders" => { "PLOrder" => order.to_h }
         }
       }).body
+      SubmitOrderResponse.new(data)
     end
 
     def get_order_status(order_numbers)
       authenticate
-      @client.call(:pl_get_order_status, message: {
+      data = @client.call(:pl_get_order_status, message: {
         "args" => {
           "SystemId" => config.username,
           "Password" => config.password,
           "OrderNumbers" => { "string" => order_numbers }
         }
       }).body
+      OrderStatusResponse.new(data)
     end
 
-    # def get_inventory()
-    #   authenticate
-    #   @client.call(:pl_get_inventory, message: {
-    #     #TODO
-    #   }).body
-    # end
+    def get_inventory()
+      authenticate
+      @client.call(:pl_get_inventory, message: {
+        #TODO
+      }).body
+    end
 
     def test_login(username, password)
       result = @client.call(:test_login, message: {

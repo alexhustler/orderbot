@@ -1,5 +1,5 @@
 module OrderBot
-  class OrderLine < Base
+  class OrderLine < AbstractData
     attr_accessor :line_number,
       :product,
       :description,

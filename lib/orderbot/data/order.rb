@@ -1,5 +1,5 @@
 module OrderBot
-  class Order < Base
+  class Order < AbstractData
     attr_accessor :order_number,
       :customer_number,
       :customer_order_number,
