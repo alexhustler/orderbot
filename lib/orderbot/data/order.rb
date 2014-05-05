@@ -35,7 +35,7 @@ module OrderBot
     end
 
     def to_h
-      hash = super.except("OrderLine")
+      hash = super
       hash["ShippingAddress"] = shipping_address.to_h
       hash["BillingAddress"] = billing_address.to_h
       hash["Payment"] = payment.to_h
