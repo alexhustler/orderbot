@@ -10,6 +10,7 @@ module OrderBot
   autoload :PaymentInfo, 'orderbot/data/payment_info'
 
   autoload :AbstractResponse, 'orderbot/responses/abstract_response'
+  autoload :OrderStatus, 'orderbot/responses/order_status'
   autoload :OrderStatusResponse, 'orderbot/responses/order_status_response'
   autoload :SubmitOrderResponse, 'orderbot/responses/submit_order_response'
 end

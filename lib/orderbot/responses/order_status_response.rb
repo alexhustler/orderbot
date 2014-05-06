@@ -6,8 +6,10 @@ module OrderBot
       false
     end
 
-    def statuses
-      @data[:pl_get_order_status_response][:pl_get_order_status_result][:orders]
+    def orders
+      @data[:pl_get_order_status_response][:pl_get_order_status_result][:orders][:pl_order_status_header].collect do |order_data|
+        OrderStatus.new(order_data)
+      end
     end
 
     def error_message
