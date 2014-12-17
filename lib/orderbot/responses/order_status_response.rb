@@ -7,7 +7,12 @@ module OrderBot
     end
 
     def orders
-      order_data = @data[:pl_get_order_status_response][:pl_get_order_status_result][:orders][:pl_order_status_header]
+      all_orders = @data[:pl_get_order_status_response][:pl_get_order_status_result][:orders]
+      if all_orders.blank?
+        return []
+      end
+
+      order_data = all_orders[:pl_order_status_header]
       if order_data.is_a?(Hash)
         [ OrderStatus.new(order_data) ]
       else
